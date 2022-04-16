@@ -1,29 +1,110 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+:root {
+    --white: #ffffff;
+    --twitterblue: #1da1f2;
+    --twitterblack: #14171a;
+    --twitterdarkgrey: #657786;
+    --twittergrey: #aab8c2;
+    --pad: 10px;
+}
+
+* {
+ margin: 0;
+ color: var(--white);
+}
+
+body {
+    width: 16rem;
+    background: var(--twitterblack);
+    padding: var(--pad);
+}
+
 h1, h2, h3 {
     font-family: "Quicksand";
 }
 
 h1 {
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 2rem;
+    text-align: center;
 }
 
 h2 {
     font-weight: 400;
-    font-size: 0.6rem;
+    font-size: 1.2rem;
 }
 
 h3 {
     font-weight: 400;
-    font-size: 0.6rem;
+    font-size: 1.2rem;
+}
+
+p {
+    font-weight: 400;
+    font-size: 0.8rem;
+    width: fit-content;
+}
+
+.round-box {
+    border-radius: var(--pad);
 }
 
 #title-box {
     width: 100%;
     height: fit-content;
+    justify-content: center;
+    background: var(--twitterblue);
+    margin-bottom: var(--pad);
 }
 
-#sentiment-average {
+.content-box {
+    background: var(--twitterdarkgrey);
+    padding: var(--pad);
+    margin-top: var(--pad);
+}
+
+#sentiment-comments {
 
 }
+
+#sentiment-data {
+}
+
+.slider-text {
+    display: flex;
+    flex-direction: row;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.slider-box {
+    height: 20px;
+    border-radius: 10px;
+    position: relative;
+    background: var(--twitterblack);
+}
+
+.slider-progress {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--twittergrey);
+}
+
+#slider-average {
+
+}
+
+#slider-intensity {
+
+}
+
+

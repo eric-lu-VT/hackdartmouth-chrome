@@ -4,29 +4,46 @@
     <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <div id="title-box">
+
+    <div id="title-box" class="round-box">
         <h1>Sadbird</h1>
     </div>
 
-    <div id="sentiment-analysis">
-        <h2 id="sentiment-analysis-text"></h2>
+    <div id="sentiment-comments" class="round-box content-box">
+        <div id="sentiment-analysis">
+            <h2 id="sentiment-analysis-text"></h2>
+        </div>
+
+        <div id="sentiment-suggestion">
+            <h2 id="sentiment-suggestion-text"></h2>
+        </div>
     </div>
 
-    <div id="sentiment-suggestion">
-        <h2 id="sentiment-suggestion-text"></h2>
-    </div>
-
-    <div id="sentiment-data">
+    <div id="sentiment-data" class="round-box content-box">
         <h3>Average Emotion</h3>
         <div id="sentiment-average">
-            <p>Sad</p>
-            <p>Happy</p>
+            <div class="slider-box">
+                <div id="slider-average" class="slider-progress"></div>
+            </div>
+
+            <div class="slider-text">
+                <p class="text-left">Sad</p>
+                <div class="spacer"></div>
+                <p class="text-right">Happy</p>
+            </div>
         </div>
 
         <h3>Emotional Intensity</h3>
         <div id="sentiment-intensity">
-            <p>Neutral</p>
-            <p>Intense</p>
+            <div class="slider-box">
+                <div id="slider-intensity" class="slider-progress"></div>
+            </div>
+
+            <div class="slider-text">
+                <p class="text-left">Neutral</p>
+                <div class="spacer"></div>
+                <p class="text-right">Intense</p>
+            </div>
         </div>
     </div>
 
