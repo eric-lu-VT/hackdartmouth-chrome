@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <button id="changeColor"></button>
+    <div id="title-box">
+        <h1>Sadbird</h1>
+    </div>
+
+    <div id="sentiment-analysis">
+        <h2 id="sentiment-analysis-text"></h2>
+    </div>
+
+    <div id="sentiment-suggestion">
+        <h2 id="sentiment-suggestion-text"></h2>
+    </div>
+
+    <div id="sentiment-data">
+        <h3>Average Emotion</h3>
+        <div id="sentiment-average">
+            <p>Sad</p>
+            <p>Happy</p>
+        </div>
+
+        <h3>Emotional Intensity</h3>
+        <div id="sentiment-intensity">
+            <p>Neutral</p>
+            <p>Intense</p>
+        </div>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>

@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+h1, h2, h3 {
+    font-family: "Quicksand";
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 0.6rem;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 0.6rem;
+}
+
+#title-box {
+    width: 100%;
+    height: fit-content;
+}
+
+#sentiment-average {
+
+}
