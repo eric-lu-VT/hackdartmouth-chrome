@@ -1,1 +1,1 @@
-# hackdartmouth-chrome
+# hackdartmouth-chrome-extension
