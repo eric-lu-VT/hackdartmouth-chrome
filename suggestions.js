@@ -44,7 +44,7 @@ const suggestions = {
 }
 
 const getMood = (score, intensity) => {
-  console.log("inside getMood, score: " + score + ", intensity: " + intensity)
+  // console.log("inside getMood, score: " + score + ", intensity: " + intensity)
   if (intensity - score < 0.75 && intensity + score < 0.75) {
     return 'neutral'
   } else if (score > 0.3) {
