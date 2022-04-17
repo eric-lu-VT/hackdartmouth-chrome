@@ -16,7 +16,7 @@ const analysis = {
   conflict:[
     "Twitter seems pretty divided... uh oh.",
     "There's a lot going on Twitter today.",
-    "Confusing feed... interesting"
+    "You have a confusing feed today..."
   ]
 }
 
@@ -36,19 +36,20 @@ const suggestions = {
     "Stay hydrated."
   ],
   conflict:[
-    "Maybe try a book for a change...",
-    "Taking a break from Twitter can help a lot.",
-    "Twitter can be a lot sometimes, take a break.",
+    "Maybe try a book?",
+    "Taking a break from social media can help a lot.",
+    "Social media can be a lot sometimes, remember to take a break.",
     "Go hang out with some friends, Twitter's not going anywhere."
   ]
 }
 
 const getMood = (score, intensity) => {
+  console.log("inside getMood, score: " + score + ", intensity: " + intensity)
   if (intensity - score < 0.75 && intensity + score < 0.75) {
     return 'neutral'
   } else if (score > 0.3) {
     return 'positive'
-  } else if (score < 0.3) {
+  } else if (score < -0.3) {
     return 'negative'
   } else {
     return 'conflict'

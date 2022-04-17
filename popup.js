@@ -10,21 +10,6 @@ const retrieveTwitterText = () => {
   ]
 }
 
-function setEmotionData() {
-  // console.log('Setting the emotion data')
-  const { twitterOpen, twitterCurrent, twitCurrTab } = getOpenTwitter()
-  console.log('Setting the emotion data');
-
-
-  if (!twitterCurrent) {
-    // Twitter's not open, dummy!
-    console.log("Twitter isn't open right now!")
-    return
-  }
-}
-
-// getOpenTabs({})
-
 async function readTwitterData() {
   console.log('hi');
   let currTwitter = await getOpenTwitter()
@@ -38,7 +23,8 @@ async function readTwitterData() {
   }
 
   const tweetTab = currTwitter.twitterCurrTab
-  const tweetText = tweetTab.title.substring(tweetTab.title.indexOf("\\\"") + 1, tweetTab.title.length - 10);
+  console.log(tweetTab.title)
+  const tweetText = tweetTab.title.substring(tweetTab.title.indexOf("\"") + 1, tweetTab.title.length - 11);
 
   console.log(tweetText);
 
@@ -57,24 +43,41 @@ async function readTwitterData() {
     if (this.readyState != 4) return;
 
     if (this.status == 200) {
-      let data = JSON.parse(this.responseText);
-      console.log("Magnitude: " + data.documentSentiment.magnitude);
-      console.log("Score: " + data.documentSentiment.score);
+      const data = JSON.parse(this.responseText)
+      const documentSentiment = data.documentSentiment
 
-      const mood = getMood(data.documentSentiment.score, data.documentSentiment.magnitude)
-      console.log(mood)
-      const sentimentAnalysis = analysis[mood][Math.random() * analysis[mood].length]
-      const sentimentSuggestion = suggestions[mood][Math.random() * analysis[mood].length]
+      /* console.log("Score: " + data.documentSentiment.score);
+      console.log("Magnitude: " + data.documentSentiment.magnitude); */
+
+      const mood = getMood(documentSentiment.score, documentSentiment.magnitude)
+      const sentimentAnalysis = analysis[mood][parseInt(Math.random() * analysis[mood].length)]
+      const sentimentSuggestion = suggestions[mood][parseInt(Math.random() * analysis[mood].length)]
       console.log(sentimentAnalysis)
       console.log(sentimentSuggestion)
 
+      // HTML manipulation
+      document.getElementById("sentiment-analysis-text").innerText = sentimentAnalysis
+      document.getElementById("sentiment-suggestion-text").innerText = sentimentSuggestion
 
-      document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
+      const normScore = (documentSentiment.score + 1) * 50
+      const normScoreRight = 100 - normScore
+      const normIntensity = (1 - documentSentiment.magnitude) * 100
+      // CSS manipulation
+      let sliderScore = document.getElementById("slider-average")
+      sliderScore.style.background = '#0000ff'
+      sliderScore.style.left = 'min( calc(50% - var(--pad)), ' + normScore + '%)'
+      sliderScore.style.right = 'min( calc(50% - var(--pad)), ' + normScoreRight + '%)'
+
+      let sliderIntensity = document.getElementById("slider-intensity")
+      sliderIntensity.style.right = normIntensity + '%'
+      sliderIntensity.style.background = '#00ff00'
+
+
+      // document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
     }
   };
 }
 
-setEmotionData()
 readTwitterData()
 
 /*
