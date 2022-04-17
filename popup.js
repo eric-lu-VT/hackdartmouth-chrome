@@ -55,8 +55,10 @@ xhr.onreadystatechange = function () {
   if (this.readyState != 4) return;
 
   if (this.status == 200) {
-      var data = JSON.parse(this.responseText);
-      console.log(data);
+    var data = JSON.parse(this.responseText);
+    console.log("Magnitude: " + data.documentSentiment.magnitude);
+    console.log("Score: " + data.documentSentiment.score);
+    document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
   }
 };
 
