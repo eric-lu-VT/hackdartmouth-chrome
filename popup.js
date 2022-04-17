@@ -1,5 +1,6 @@
 import { TWITTER_URL, getOpenTwitter } from './twittertab.js';
 import { analysis, suggestions, getMood } from './suggestions.js';
+import { mix } from './color.js'
 
 const retrieveTwitterText = () => {
   return [
@@ -63,13 +64,13 @@ async function readTwitterData() {
       const normIntensity = (1 - documentSentiment.magnitude) * 100
       // CSS manipulation
       let sliderScore = document.getElementById("slider-average")
-      sliderScore.style.background = '#0000ff'
+      sliderScore.style.background = '#' + mix('ff0000', '00ff00', normScore/100)
       sliderScore.style.left = 'min( calc(50% - var(--pad)), ' + normScore + '%)'
       sliderScore.style.right = 'min( calc(50% - var(--pad)), ' + normScoreRight + '%)'
 
       let sliderIntensity = document.getElementById("slider-intensity")
+      sliderIntensity.style.background = '#' + mix('00ff00', 'ff0000', normIntensity/100)
       sliderIntensity.style.right = normIntensity + '%'
-      sliderIntensity.style.background = '#00ff00'
 
 
       // document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
@@ -96,19 +97,19 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
     xhr.onreadystatechange = function () {
       if (this.readyState != 4) return;
-  
+
       if (this.status == 200) {
         let data = JSON.parse(this.responseText);
         console.log("Magnitude: " + data.documentSentiment.magnitude);
         console.log("Score: " + data.documentSentiment.score);
-  
+
         const mood = getMood(data.documentSentiment.score, data.documentSentiment.magnitude)
         console.log(mood)
         const sentimentAnalysis = analysis[mood][Math.random() * analysis[mood].length]
         const sentimentSuggestion = suggestions[mood][Math.random() * analysis[mood].length]
         console.log(sentimentAnalysis)
         console.log(sentimentSuggestion)
-  
+
         document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
         console.log('reached the end');
       }
