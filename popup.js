@@ -9,6 +9,10 @@ async function readTwitterData() {
 
   if (!currTwitter.twitterCurr) {
     // We're not on twitter, dummy!
+    document.getElementById("sentiment-analysis-text").innerText = analysis['invalid'][parseInt(Math.random() * analysis['invalid'].length)]
+    document.getElementById("sentiment-suggestion-text").innerText = suggestions['invalid'][parseInt(Math.random() * suggestions['invalid'].length)]
+    document.getElementById("sentiment-data").innerHTML = ""
+
     console.log('not on twitter')
     return
   }
@@ -42,7 +46,7 @@ async function readTwitterData() {
 
       const mood = getMood(documentSentiment.score, documentSentiment.magnitude)
       const sentimentAnalysis = analysis[mood][parseInt(Math.random() * analysis[mood].length)]
-      const sentimentSuggestion = suggestions[mood][parseInt(Math.random() * analysis[mood].length)]
+      const sentimentSuggestion = suggestions[mood][parseInt(Math.random() * suggestions[mood].length)]
       console.log(sentimentAnalysis)
       console.log(sentimentSuggestion)
 

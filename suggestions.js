@@ -17,6 +17,11 @@ const analysis = {
     "Twitter seems pretty divided... uh oh.",
     "There's a lot going on Twitter today.",
     "You have a confusing feed today..."
+  ],
+  invalid:[
+    "Looks like you're not on Twitter right now.",
+    "We're glad to see you're not on Twitter right now!",
+    "You don't have Twitter open right now."
   ]
 }
 
@@ -40,6 +45,11 @@ const suggestions = {
     "Taking a break from social media can help a lot.",
     "Social media can be a lot sometimes, remember to take a break.",
     "Go hang out with some friends, Twitter's not going anywhere."
+  ],
+  invalid: [
+    "Good choice. We can all use a break from social media sometimes.",
+    "It feels nice to be outside the online world.",
+    "Nice!"
   ]
 }
 
