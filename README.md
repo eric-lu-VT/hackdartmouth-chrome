@@ -1,5 +1,5 @@
 # sadbird
-A chrome extension reminding you of self-care
+A Chrome extension to gauge the happiness level of Twitter posts.
 
 ## Inspiration
 
