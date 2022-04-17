@@ -9,7 +9,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["myscript.js"]
+      "js": ["myscript.js"],
+      "type": "module"
     }
   ],
   "permissions": ["storage", "activeTab", "scripting"],
