@@ -1,5 +1,6 @@
 import { getOpenTwitter } from './twittertab.js'
 import { getSuggestions, getAnalysis } from './suggestions.js'
+import language from '@google-cloud/language';
 
 // Initialize button with users's prefered color
 /* let changeColor = document.getElementById("changeColor");
