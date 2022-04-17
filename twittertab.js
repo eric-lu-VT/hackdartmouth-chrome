@@ -11,4 +11,3 @@ const getOpenTwitter = async () => {
 }
 
 export { getOpenTwitter }
-module.exports.getOpenTwitter = getOpenTwitter
