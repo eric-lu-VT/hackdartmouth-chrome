@@ -1,25 +1,18 @@
+let request = new XMLHttpRequest();
 
-async function quickstart() {
-  // Imports the Google Cloud client library
-  const language = require('@google-cloud/language');
+const text= "yay";
 
-  // Instantiates a client
-  const client = new language.LanguageServiceClient();
+const doc = {
+  content: text,
+  type: 'PLAIN_TEXT',
+};
 
-  // The text to analyze
-  const text = 'hello world';
+const requestBuilding = {
+  "document": doc,
+  "encodingType": "UTF16"
+};
 
-  const document = {
-    content: text,
-    type: 'PLAIN_TEXT',
-  };
 
-  // Detects the sentiment of the text
-  const [result] = await client.analyzeSentiment({document: document});
-  const sentiment = result.documentSentiment;
 
-  console.log(`Text: ${text}`);
-  console.log(`Sentiment score: ${sentiment.score}`);
-  console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
-}
-quickstart();
+request.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment");
+request.send(requestBuilding);
