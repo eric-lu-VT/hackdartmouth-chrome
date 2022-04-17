@@ -36,7 +36,7 @@ const suggestions = {
     "Stay hydrated."
   ],
   conflict:[
-    "Maybe try a book?",
+    "Maybe try a book instead?",
     "Taking a break from social media can help a lot.",
     "Social media can be a lot sometimes, remember to take a break.",
     "Go hang out with some friends, Twitter's not going anywhere."
