@@ -2,15 +2,6 @@ import { TWITTER_URL, getOpenTwitter } from './twittertab.js';
 import { analysis, suggestions, getMood } from './suggestions.js';
 import { mix } from './color.js'
 
-const retrieveTwitterText = () => {
-  return [
-    "This is the ugliest, nastiest, most appallingly terrible thing I have ever seen",
-    "I love rainbows! Roses are so pretty! Everything is great about today :)",
-    "Someday everybody you love will die.",
-    "I hate politics. It's so divisive and depressing to deal with. I wish it would just end."
-  ]
-}
-
 async function readTwitterData() {
   let currTwitter = await getOpenTwitter()
   console.log(currTwitter)
@@ -64,12 +55,13 @@ async function readTwitterData() {
       const normIntensity = (1 - documentSentiment.magnitude) * 100
       // CSS manipulation
       let sliderScore = document.getElementById("slider-average")
-      sliderScore.style.background = '#' + mix('ff0000', '00ff00', normScore/100)
+      sliderScore.style.background = 'color-mix(in srgb, ' + '#00ff00 ' + normScore + '%, ' + '#ff0000' + ')'
       sliderScore.style.left = 'min( calc(50% - var(--pad)), ' + normScore + '%)'
       sliderScore.style.right = 'min( calc(50% - var(--pad)), ' + normScoreRight + '%)'
+      console.log(sliderScore.style.background)
 
       let sliderIntensity = document.getElementById("slider-intensity")
-      sliderIntensity.style.background = '#' + mix('00ff00', 'ff0000', normIntensity/100)
+      sliderIntensity.style.background = 'color-mix(in srgb, #ff0000' + normIntensity + '%, #00ff00)'
       sliderIntensity.style.right = normIntensity + '%'
 
 
