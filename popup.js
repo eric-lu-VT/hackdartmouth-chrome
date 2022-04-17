@@ -1,20 +1,6 @@
 import { getOpenTwitter } from './twittertab.js';
 import { getSuggestions, getAnalysis } from './suggestions.js';
 
-// Initialize button with users's prefered color
-/* let changeColor = document.getElementById("changeColor");
-
-chrome.storage.sync.get("color", ({ color }) => {
-}); */
-
-
-// The body of this function will be executed as a content script inside the
-// current page
-/* function setPageBackgroundColor() {
-  chrome.storage.sync.get("color", ({ color }) => {
-    document.body.style.backgroundColor = color;
-  });
-} */
 const retrieveTwitterText = () => {
   return [
     "This is the ugliest, nastiest, most appallingly terrible thing I have ever seen",
@@ -25,9 +11,10 @@ const retrieveTwitterText = () => {
 }
 
 function setEmotionData() {
-  console.log('Setting the emotion data')
+  // console.log('Setting the emotion data')
   const { twitterOpen, twitterCurrent, twitCurrTab } = getOpenTwitter()
-  console.log('Setting the emotion data')
+  console.log('Setting the emotion data');
+
 
   if (!twitterCurrent) {
     // Twitter's not open, dummy!
@@ -47,13 +34,19 @@ function setEmotionData() {
 // getOpenTabs({})
 setEmotionData()
 
+console.log('hi');
+var res = (await chrome.tabs.query({ currentWindow: true, active: true }))[0].title;
+res = res.substring(res.indexOf("\"") + 1, res.length - 10);
+
+console.log(res);
+
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=AIzaSyA_WiRQpF3lpstDd1v8Sm1kgLyyuEVcqnY", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send(JSON.stringify({
   "document": {
     "type": "PLAIN_TEXT",
-    "content": "hello"
+    "content": res
   },
   "encodingType": "UTF16"
 }));
@@ -64,9 +57,15 @@ xhr.onreadystatechange = function () {
   if (this.status == 200) {
       var data = JSON.parse(this.responseText);
       console.log(data);
-
-      // we get the returned data
   }
-
-  // end of state change: it can be after some time (async)
 };
+
+/*
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  console.log(message);
+  sendResponse({
+    data: "Recieved from content script"
+  }); 
+  res = message;
+});
+*/
