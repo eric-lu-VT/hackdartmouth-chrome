@@ -1,6 +1,6 @@
 {
-  "name": "Getting Started Example",
-  "description": "Build an Extension!",
+  "name": "Sadbird",
+  "description": "A Chrome extension to gauge the happiness level of Twitter posts.",
   "version": "1.0",
   "manifest_version": 3,
   "background": {
