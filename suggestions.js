@@ -1,11 +1,22 @@
 const analysis = {
   positive: [
     "The internet is treating you well!",
+    "Fun twitter feed today!"
   ],
 
   negative: [
     "Twitter has been pretty rough lately...",
     "The internet can be a scary place...",
+    "This seems a little hostile."
+  ],
+  neutral:[
+    "Your feed is pretty neutral today.",
+    "Nice and calm, like a breeze on a sunny day.",
+  ],
+  conflict:[
+    "Twitter seems pretty divided... uh oh.",
+    "There's a lot going on Twitter today.",
+    "Confusing feed... interesting"
   ]
 }
 
@@ -17,7 +28,18 @@ const suggestions = {
   negative: [
     "Remember to take a break from the internet!",
     "Go outside and enjoy the sun if you can!",
-    "Try reaching out to some friends!"
+    "Try reaching out to some friends!",
+    "Touch some grass!"
+  ],
+  neutral:[
+    "Have a good day today.",
+    "Stay hydrated."
+  ],
+  conflict:[
+    "Maybe try a book for a change...",
+    "Taking a break from Twitter can help a lot.",
+    "Twitter can be a lot sometimes, take a break.",
+    "Go hang out with some friends, Twitter's not going anywhere."
   ]
 }
 
