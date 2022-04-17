@@ -1,6 +1,5 @@
-import { getOpenTwitter } from './twittertab.js'
-import { getSuggestions, getAnalysis } from './suggestions.js'
-import language from '@google-cloud/language';
+import { getOpenTwitter } from './twittertab.js';
+import { getSuggestions, getAnalysis } from './suggestions.js';
 
 // Initialize button with users's prefered color
 /* let changeColor = document.getElementById("changeColor");
@@ -43,9 +42,31 @@ function setEmotionData() {
   const magnitude = twitterText.reduce((prev, cur) => prev + Math.abs(cur), 0) / twitterText.length
   // Generate some text to display
   // display the text and the bars
-
 }
 
 // getOpenTabs({})
 setEmotionData()
 
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=AIzaSyA_WiRQpF3lpstDd1v8Sm1kgLyyuEVcqnY", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+  "document": {
+    "type": "PLAIN_TEXT",
+    "content": "hello"
+  },
+  "encodingType": "UTF16"
+}));
+
+xhr.onreadystatechange = function () {
+  if (this.readyState != 4) return;
+
+  if (this.status == 200) {
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+
+      // we get the returned data
+  }
+
+  // end of state change: it can be after some time (async)
+};
