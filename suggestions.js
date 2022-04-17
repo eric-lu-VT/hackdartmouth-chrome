@@ -55,17 +55,5 @@ const getMood = (score, intensity) => {
   }
 }
 
-const getAnalysis = (score, threshold=0.3) => {
-  let emotion = score < threshold? 'positive': 'negative'
-
-  const numAnalysisOpts = analysis[emotion].length
-  const numSuggestionOpts = suggestions[emotion].length
-
-}
-
-const getSuggestions = (score, threshold=0.3) => {
-
-}
-
-export { analysis, suggestions, getMood, getAnalysis, getSuggestions }
+export { analysis, suggestions, getMood }
 

@@ -1,5 +1,5 @@
-import { getOpenTwitter } from './twittertab.js';
-import { getSuggestions, getAnalysis } from './suggestions.js';
+import { TWITTER_URL, getOpenTwitter } from './twittertab.js';
+import { analysis, suggestions, getMood } from './suggestions.js';
 
 const retrieveTwitterText = () => {
   return [
@@ -21,53 +21,68 @@ function setEmotionData() {
     console.log("Twitter isn't open right now!")
     return
   }
-
-  // get the text from the twitter page
-  const twitterText = retrieveTwitterText()
-  // score the retrieved text
-  const average = twitterText.reduce((prev, cur) => prev + cur, 0) / twitterText.length
-  const magnitude = twitterText.reduce((prev, cur) => prev + Math.abs(cur), 0) / twitterText.length
-  // Generate some text to display
-  // display the text and the bars
 }
 
 // getOpenTabs({})
-setEmotionData()
 
-console.log('hi');
-var res = (await chrome.tabs.query({ currentWindow: true, active: true }))[0].title;
-res = res.substring(res.indexOf("\"") + 1, res.length - 10);
+async function readTwitterData() {
+  console.log('hi');
+  let currTwitter = await getOpenTwitter()
+  console.log(currTwitter)
+  console.log(currTwitter.twitterCurrTab)
 
-console.log(res);
-
-var xhr = new XMLHttpRequest();
-xhr.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=AIzaSyA_WiRQpF3lpstDd1v8Sm1kgLyyuEVcqnY", true);
-xhr.setRequestHeader('Content-Type', 'application/json');
-xhr.send(JSON.stringify({
-  "document": {
-    "type": "PLAIN_TEXT",
-    "content": res
-  },
-  "encodingType": "UTF16"
-}));
-
-xhr.onreadystatechange = function () {
-  if (this.readyState != 4) return;
-
-  if (this.status == 200) {
-    var data = JSON.parse(this.responseText);
-    console.log("Magnitude: " + data.documentSentiment.magnitude);
-    console.log("Score: " + data.documentSentiment.score);
-    document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
+  if (!currTwitter.twitterCurr) {
+    // We're not on twitter, dummy!
+    console.log('not on twitter')
+    return
   }
-};
+
+  const tweetTab = currTwitter.twitterCurrTab
+  const tweetText = tweetTab.title.substring(tweetTab.title.indexOf("\\\"") + 1, tweetTab.title.length - 10);
+
+  console.log(tweetText);
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=AIzaSyA_WiRQpF3lpstDd1v8Sm1kgLyyuEVcqnY", true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    "document": {
+      "type": "PLAIN_TEXT",
+      "content": tweetText
+    },
+    "encodingType": "UTF16"
+  }));
+
+  xhr.onreadystatechange = function () {
+    if (this.readyState != 4) return;
+
+    if (this.status == 200) {
+      let data = JSON.parse(this.responseText);
+      console.log("Magnitude: " + data.documentSentiment.magnitude);
+      console.log("Score: " + data.documentSentiment.score);
+
+      const mood = getMood(data.documentSentiment.score, data.documentSentiment.magnitude)
+      console.log(mood)
+      const sentimentAnalysis = analysis[mood][Math.random() * analysis[mood].length]
+      const sentimentSuggestion = suggestions[mood][Math.random() * analysis[mood].length]
+      console.log(sentimentAnalysis)
+      console.log(sentimentSuggestion)
+
+
+      document.getElementById("data").textContent = "Magnitude: " + data.documentSentiment.magnitude + "; Score: " + data.documentSentiment.score
+    }
+  };
+}
+
+setEmotionData()
+readTwitterData()
 
 /*
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   console.log(message);
   sendResponse({
     data: "Recieved from content script"
-  }); 
+  });
   res = message;
 });
 */
