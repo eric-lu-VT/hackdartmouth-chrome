@@ -21,6 +21,18 @@ const suggestions = {
   ]
 }
 
+const getMood = (score, intensity) => {
+  if (intensity - score < 0.75 && intensity + score < 0.75) {
+    return 'neutral'
+  } else if (score > 0.3) {
+    return 'positive'
+  } else if (score < 0.3) {
+    return 'negative'
+  } else {
+    return 'conflict'
+  }
+}
+
 const getAnalysis = (score, threshold=0.3) => {
   let emotion = score < threshold? 'positive': 'negative'
 
@@ -33,5 +45,5 @@ const getSuggestions = (score, threshold=0.3) => {
 
 }
 
-export { analysis, suggestions, getAnalysis, getSuggestions }
+export { analysis, suggestions, getMood, getAnalysis, getSuggestions }
 
