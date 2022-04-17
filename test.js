@@ -1,26 +1,31 @@
-import fetch from 'node-fetch';
+// Imports the Google Cloud client library
+import language from '@google-cloud/language';
 
-const url = "https://language.googleapis.com/v1beta2/documents:analyzeSentiment";
-const text= "yay";
+// Creates a client
+const client = new language.LanguageServiceClient();
 
-const doc = {
+/**
+ * TODO(developer): Uncomment the following line to run this code.
+ */
+ const text = 'Your text to analyze, e.g. Hello, world!';
+
+// Prepares a document, representing the provided text
+const document = {
   content: text,
   type: 'PLAIN_TEXT',
 };
 
-const requestBuilding = {
-  "document": doc,
-  "encodingType": "UTF16"
-};
+// Detects the sentiment of the document
+const [result] = await client.analyzeSentiment({document});
 
-async function test() {
+const sentiment = result.documentSentiment;
+console.log('Document sentiment:');
+console.log(`  Score: ${sentiment.score}`);
+console.log(`  Magnitude: ${sentiment.magnitude}`);
 
-
-  const response = await fetch(url, { method: 'POST' }, requestBuilding)
-    .then(response => response.json())
-    .then(response => {return response})
-
-  return response;
-}
-
-console.log(test());
+const sentences = result.sentences;
+sentences.forEach(sentence => {
+  console.log(`Sentence: ${sentence.text.content}`);
+  console.log(`  Score: ${sentence.sentiment.score}`);
+  console.log(`  Magnitude: ${sentence.sentiment.magnitude}`);
+});
