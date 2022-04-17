@@ -1,0 +1,24 @@
+{
+  "name": "hackdartmouth-chrome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eric-lu-VT/hackdartmouth-chrome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eric-lu-VT/hackdartmouth-chrome/issues"
+  },
+  "homepage": "https://github.com/eric-lu-VT/hackdartmouth-chrome#readme",
+  "dependencies": {
+    "@google-cloud/language": "^4.3.2"
+  }
+}
