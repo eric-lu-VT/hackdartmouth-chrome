@@ -1,5 +1,6 @@
-let request = new XMLHttpRequest();
+import fetch from 'node-fetch';
 
+const url = "https://language.googleapis.com/v1beta2/documents:analyzeSentiment";
 const text= "yay";
 
 const doc = {
@@ -12,7 +13,14 @@ const requestBuilding = {
   "encodingType": "UTF16"
 };
 
+async function test() {
 
 
-request.open("POST", "https://language.googleapis.com/v1beta2/documents:analyzeSentiment");
-request.send(requestBuilding);
+  const response = await fetch(url, { method: 'POST' }, requestBuilding)
+    .then(response => response.json())
+    .then(response => {return response})
+
+  return response;
+}
+
+console.log(test());
